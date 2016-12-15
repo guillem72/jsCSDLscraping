@@ -8,14 +8,20 @@ var term="array";
 var term2="swot";
 var terms=["array","swot"];
 //saveHtmlTerm(term);
-searchTerms(terms);
+searchTerms(terms,true);
 function searchTerms(terms,see,agent){
+	if( typeof see === 'undefined' || see === null ){
+    see=false;
+	}
+	if( typeof agent === 'undefined' || agent === null ){
+    agent="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36";
+	}
 	
 terms.map(saveHtmlTerm);
 	function saveHtmlTerm(term){
-		var nightmare = Nightmare({ show: true });
+		var nightmare = Nightmare({ show: see });
 		nightmare
-		.useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
+		.useragent(agent)
 	  .goto('https://www.computer.org/web/search')
 	  .click('#btn50')
 	  .wait(1000)
